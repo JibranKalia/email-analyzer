@@ -1,14 +1,16 @@
 package routes
 
-import "net/http"
-
-// ... other imports for your web framework
+import (
+	"github.com/gin-gonic/gin"
+	"net/http"
+)
 
 func RegisterRoutes() {
-	http.HandleFunc("/analyze", analyzeEmailData)
+	router := gin.Default()                  // Create a Gin router
+	router.GET("/analyze", analyzeEmailData) // Update route registration
 }
 
-func analyzeEmailData(w http.ResponseWriter, r *http.Request) {
+func analyzeEmailData(c *gin.Context) {
 	// TODO: Retrieve parameters for analysis (e.g., time window)
 
 	// TODO: Write SQL queries to:
@@ -17,4 +19,7 @@ func analyzeEmailData(w http.ResponseWriter, r *http.Request) {
 	//       * Find unusual subject line keywords based on historical data
 
 	// TODO: Return analysis results
+	c.JSON(http.StatusOK, gin.H{
+		// Placeholder for your analysis results
+	})
 }
